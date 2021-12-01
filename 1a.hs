@@ -3,7 +3,12 @@ import Prelude
 main :: IO ()
 main = do
   input <- getContents
-  (putStr . show . fn . lines) input
+  (print . fn . map read . lines) input
 
-fn :: a -> a
-fn = id
+countIncreases :: (Int, Int) -> Int -> (Int, Int)
+countIncreases (prev, n) x = (x, next)
+  where
+    next = if prev < x then n + 1 else n
+
+fn :: [Int] -> Int
+fn =  snd . foldl countIncreases (-1, -1)
