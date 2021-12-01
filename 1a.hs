@@ -5,10 +5,8 @@ main = do
   input <- getContents
   (print . fn . map read . lines) input
 
-countIncreases :: (Int, Int) -> Int -> (Int, Int)
-countIncreases (prev, n) x = (x, next)
-  where
-    next = if prev < x then n + 1 else n
+count :: (Eq a) => a -> [a] -> Int
+count x = length . filter (== x)
 
 fn :: [Int] -> Int
-fn =  snd . foldl countIncreases (-1, -1)
+fn xs = count True $ zipWith (>) (tail xs) xs
