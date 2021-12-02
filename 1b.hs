@@ -6,14 +6,12 @@
 -- diff between x2 and x3 is 2 / 5
 
 import Prelude
+import Lib
 
 main :: IO ()
 main = do
   input <- getContents
   (print . fn . map read . lines) input
-
-count :: (Eq a) => a -> [a] -> Int
-count x = length . filter (== x)
 
 fn :: [Int] -> Int
 fn xs = count True $ zipWith (>) (drop 3 xs) xs
