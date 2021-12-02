@@ -31,10 +31,9 @@ main = do
       . lines
     ) input
 
-applyInstruction :: Instruction -> Position -> Position
-applyInstruction (Forward x) = first (x +)
-applyInstruction (Down x) = second (x +) -- down increases depth
-applyInstruction (Up x) = second (\y -> y - x) -- or: flip (-) x
-
 applyInstructions :: Position -> [Instruction] -> Position
 applyInstructions = foldl (flip applyInstruction)
+  where
+    applyInstruction (Forward x) = first (x +)
+    applyInstruction (Down x) = second (x +) -- down increases depth
+    applyInstruction (Up x) = second (\y -> y - x) -- or: flip (-) x

@@ -35,10 +35,9 @@ main = do
     )
     input
 
-applyInstruction :: Instruction -> Position -> Position
-applyInstruction (Forward x) (t, d, a) = (t + x, d + (x * a), a)
-applyInstruction (Down x) (t, d, a) = (t, d, a + x)
-applyInstruction (Up x) (t, d, a) = (t, d, a - x)
-
 applyInstructions :: Position -> [Instruction] -> Position
 applyInstructions = foldl (flip applyInstruction)
+  where
+    applyInstruction (Forward x) (t, d, a) = (t + x, d + (x * a), a)
+    applyInstruction (Down x) (t, d, a) = (t, d, a + x)
+    applyInstruction (Up x) (t, d, a) = (t, d, a - x)
